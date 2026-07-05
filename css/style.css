@@ -53,6 +53,9 @@ h1, h2, h3 { font-family: var(--font-display); font-weight: 700; }
 .logo-draw-dot { opacity: 0; transform: scale(0); transform-origin: 62px 30px; animation: logoPopDot .4s ease-out forwards; animation-delay: .9s; }
 .logo-draw-text { opacity: 0; transform: translateY(8px); animation: logoFadeUp .5s ease-out forwards; animation-delay: 1.1s; }
 @keyframes logoDrawLine { to { stroke-dashoffset: 0; } }
+
+.hero-line-draw { stroke-dasharray: 1; stroke-dashoffset: 1; animation: heroLineDraw 2.2s ease-out forwards; animation-delay: .3s; }
+@keyframes heroLineDraw { to { stroke-dashoffset: 0; } }
 @keyframes logoPopDot { to { opacity: 1; transform: scale(1); } }
 @keyframes logoFadeUp { to { opacity: 1; transform: translateY(0); } }
 .nav-links { list-style: none; display: flex; gap: 8px; align-items: center; }
