@@ -48,6 +48,9 @@ h1, h2, h3 { font-family: var(--font-display); font-weight: 700; }
 .nav { position: sticky; top: 0; z-index: 50; background: rgba(255,255,255,.92); backdrop-filter: blur(14px); border-bottom: 1px solid var(--line); }
 .nav .wrap { display: flex; align-items: center; justify-content: space-between; height: 76px; gap: 24px; }
 .nav-logo svg { display: block; height: 40px; width: auto; }
+.nav-brand { display: flex; align-items: center; gap: 16px; }
+.nav-tagline { font-family: 'Poppins', sans-serif; font-weight: 800; font-size: 0.72rem; color: var(--brand-blue); letter-spacing: 0.03em; text-transform: uppercase; white-space: nowrap; padding-left: 16px; border-left: 1px solid var(--line); }
+@media (max-width: 860px) { .nav-tagline { display: none; } }
 
 .logo-draw-line { stroke-dasharray: 1; stroke-dashoffset: 1; animation: logoDrawLine .9s ease-out forwards; }
 .logo-draw-dot { opacity: 0; transform: scale(0); transform-origin: 62px 30px; animation: logoPopDot .4s ease-out forwards; animation-delay: .9s; }
