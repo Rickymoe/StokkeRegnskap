@@ -33,6 +33,7 @@ function initNav() {
   if (hamburger && links) {
     hamburger.addEventListener('click', () => {
       const isOpen = links.classList.toggle('open');
+      hamburger.classList.toggle('open', isOpen);
       hamburger.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
     });
   }
