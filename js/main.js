@@ -6,6 +6,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   initNav();
   initReveal();
   initCounters();
+  initDividers();
 });
 
 async function loadPartial(url, targetId) {
@@ -54,6 +55,17 @@ function initCounters() {
     });
   }, { threshold: 0.4 });
   document.querySelectorAll('.stat-card .num').forEach(el => io.observe(el));
+}
+
+function initDividers() {
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+      entry.target.classList.add('drawn');
+      io.unobserve(entry.target);
+    });
+  }, { threshold: 0.4 });
+  document.querySelectorAll('.divider-wrap').forEach(el => io.observe(el));
 }
 
 function initReveal() {
