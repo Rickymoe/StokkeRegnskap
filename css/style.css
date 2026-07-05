@@ -48,9 +48,6 @@ h1, h2, h3 { font-family: var(--font-display); font-weight: 700; }
 .nav { position: sticky; top: 0; z-index: 50; background: rgba(255,255,255,.92); backdrop-filter: blur(14px); border-bottom: 1px solid var(--line); }
 .nav .wrap { display: flex; align-items: center; justify-content: space-between; height: 76px; gap: 24px; }
 .nav-logo svg { display: block; height: 40px; width: auto; }
-.nav-brand { display: flex; align-items: center; gap: 16px; }
-.nav-tagline { font-family: 'Poppins', sans-serif; font-weight: 800; font-size: 0.72rem; color: var(--brand-blue); letter-spacing: 0.03em; text-transform: uppercase; white-space: nowrap; padding-left: 16px; border-left: 1px solid var(--line); }
-@media (max-width: 860px) { .nav-tagline { display: none; } }
 
 .logo-draw-line { stroke-dasharray: 1; stroke-dashoffset: 1; animation: logoDrawLine .9s ease-out forwards; }
 .logo-draw-dot { opacity: 0; transform: scale(0); transform-origin: 62px 30px; animation: logoPopDot .4s ease-out forwards; animation-delay: .9s; }
@@ -139,6 +136,8 @@ h1, h2, h3 { font-family: var(--font-display); font-weight: 700; }
 .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 36px; }
 @media (max-width: 700px) { .footer-grid { grid-template-columns: 1fr; } }
 .footer-brand p { margin-top: 14px; font-size: 0.92rem; color: rgba(255,255,255,.65); max-width: 320px; }
+.footer-logo-row { display: flex; align-items: center; gap: 12px; }
+.footer-tagline { font-family: 'Poppins', sans-serif; font-weight: 800; font-size: 0.85rem; color: var(--blue-300); letter-spacing: 0.02em; text-transform: uppercase; }
 .footer-col h4 { font-family: var(--font-display); font-size: 0.9rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--blue-300); margin-bottom: 14px; }
 .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
 .footer-col a { color: rgba(255,255,255,.85); font-size: 0.92rem; }
