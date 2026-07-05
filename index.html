@@ -19,6 +19,25 @@
 
 <section class="hero">
   <svg class="watermark" viewBox="0 0 900 400" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <filter id="cellBlurHeroTL" x="-20%" y="-20%" width="140%" height="140%">
+        <feGaussianBlur stdDeviation="2.2"/>
+      </filter>
+    </defs>
+    <g filter="url(#cellBlurHeroTL)" opacity="0.35">
+      <g stroke="#FFFFFF" stroke-width="1.1" opacity="0.4">
+        <line x1="0" y1="45" x2="420" y2="45"/><line x1="0" y1="90" x2="420" y2="90"/><line x1="0" y1="135" x2="420" y2="135"/>
+        <line x1="210" y1="0" x2="210" y2="150"/>
+      </g>
+      <g font-family="IBM Plex Mono, monospace" font-size="18" font-weight="600" fill="#009FE3">
+        <text x="15" y="30">124 500</text>
+        <text x="240" y="30">15,2%</text>
+        <text x="15" y="75">98 320</text>
+        <text x="240" y="75">312 004</text>
+        <text x="15" y="120">276 450</text>
+        <text x="240" y="120">27,4%</text>
+      </g>
+    </g>
     <path d="M0,320 L60,300 L120,310 L180,260 L240,275 L300,220 L360,235 L420,180 L480,195 L540,140 L600,155 L660,110 L720,120 L780,70 L840,85 L900,40 L900,400 L0,400 Z" fill="#009FE3" opacity="0.14"/>
     <path d="M0,340 L60,330 L120,335 L180,300 L240,310 L300,270 L360,280 L420,240 L480,250 L540,205 L600,215 L660,175 L720,182 L780,145 L840,155 L900,115 L900,400 L0,400 Z" fill="#C98A3E" opacity="0.10"/>
     <polyline points="0,320 60,300 120,310 180,260 240,275 300,220 360,235 420,180 480,195 540,140 600,155 660,110 720,120 780,70 840,85 900,40" fill="none" stroke="#6FCBF2" stroke-width="2.5" opacity="0.5"/>
