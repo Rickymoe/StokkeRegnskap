@@ -5,6 +5,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   ]);
   initNav();
   initReveal();
+  initCounters();
 });
 
 async function loadPartial(url, targetId) {
@@ -34,6 +35,25 @@ function initNav() {
       hamburger.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
     });
   }
+}
+
+function initCounters() {
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+      io.unobserve(entry.target);
+      const el = entry.target;
+      const text = el.textContent;
+      const start = performance.now();
+      const duration = 1200;
+      (function tick(now) {
+        const p = Math.min((now - start) / duration, 1);
+        el.textContent = text.replace(/\d+/g, n => Math.round(+n * p));
+        if (p < 1) requestAnimationFrame(tick);
+      })(start);
+    });
+  }, { threshold: 0.4 });
+  document.querySelectorAll('.stat-card .num').forEach(el => io.observe(el));
 }
 
 function initReveal() {
