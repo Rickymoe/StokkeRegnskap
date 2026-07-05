@@ -116,7 +116,9 @@ h1, h2, h3 { font-family: var(--font-display); font-weight: 700; }
 .map-frame iframe { width: 100%; height: 360px; border: 0; display: block; }
 
 /* ===== Footer ===== */
-.footer { background: var(--navy-900); color: rgba(255,255,255,.85); padding: 56px 0 24px; }
+.footer { position: relative; overflow: hidden; background: var(--navy-900); color: rgba(255,255,255,.85); padding: 56px 0 24px; }
+.footer .watermark-cells { position: absolute; left: 0; right: 0; bottom: 0; top: 50%; width: 100%; height: 50%; z-index: 0; }
+.footer .wrap { position: relative; z-index: 1; }
 .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 36px; }
 @media (max-width: 700px) { .footer-grid { grid-template-columns: 1fr; } }
 .footer-brand p { margin-top: 14px; font-size: 0.92rem; color: rgba(255,255,255,.65); max-width: 320px; }
