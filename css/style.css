@@ -1,10 +1,11 @@
 :root {
-  --navy-900: #0B2E45;
-  --navy-700: #123F5E;
-  --brand-blue: #009FE3;
-  --blue-300: #6FCBF2;
-  --copper-500: #C98A3E;
-  --copper-700: #A66D2B;
+  --navy-900: #0B2E45;     /* mørk flate (hero, footer), sterk tekst */
+  --navy-700: #123F5E;     /* hero-gradient slutt, divider-label */
+  --brand-blue: #009FE3;   /* aksentflate: stat-kort topp-border, ikke tekst-på-lyst */
+  --blue-300: #6FCBF2;     /* aksent på MØRK bakgrunn (eyebrow, footer-overskrifter) */
+  --blue-ink: #006B9E;     /* blå tekst på lys bakgrunn (AA: 5.8:1 hvit, 5.3:1 paper-warm) */
+  --copper-500: #C98A3E;   /* primær CTA-flate */
+  --copper-700: #A66D2B;   /* CTA hover */
   --paper: #FFFFFF;
   --paper-warm: #F5F3EE;
   --ink: #1C232B;
@@ -44,7 +45,7 @@ html:not(.js) .reveal { opacity: 1; transform: none; }
 .btn-ghost { background: transparent; color: #fff; border: 2px solid rgba(255,255,255,0.35); }
 .btn-ghost:hover { border-color: #fff; }
 .btn-outline { background: transparent; color: var(--navy-900); border: 2px solid var(--line); }
-.btn-outline:hover { border-color: var(--brand-blue); color: var(--brand-blue); }
+.btn-outline:hover { border-color: var(--blue-ink); color: var(--blue-ink); }
 
 /* ===== Nav ===== */
 /* Reserver navens høyde på placeholder-diven, ellers hopper siden ~76px
@@ -69,7 +70,8 @@ html:not(.js) .reveal { opacity: 1; transform: none; }
 .partials-cached .logo-draw-text { animation: none; opacity: 1; transform: none; }
 .nav-links { list-style: none; display: flex; gap: 8px; align-items: center; }
 .nav-links a { font-size: 14px; font-weight: 600; color: var(--ink); padding: 10px 16px; border-radius: 999px; transition: background .2s, color .2s; }
-.nav-links a:hover, .nav-links a.active { background: var(--paper-warm); color: var(--brand-blue); }
+.nav-links a:hover { background: var(--paper-warm); color: var(--blue-ink); }
+.nav-links a.active { background: var(--navy-900); color: #fff; }
 .nav-cta { background: var(--copper-500); color: var(--navy-900) !important; padding: 10px 22px; border-radius: 999px; font-size: 14px; font-weight: 600; transition: background .2s, color .2s; }
 .nav-cta:hover, .nav-cta.active { background: var(--copper-700); color: #fff !important; }
 .nav-hamburger { display: none; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; padding: 8px; }
@@ -94,7 +96,8 @@ html:not(.js) .reveal { opacity: 1; transform: none; }
   .nav-links.open li:nth-child(2) { transition-delay: .1s; }
   .nav-links.open li:nth-child(3) { transition-delay: .15s; }
   .nav-links a { width: 100%; padding: 16px 4px; border-radius: 0; font-size: 16px; }
-  .nav-links a:hover, .nav-links a.active { background: none; color: var(--brand-blue); padding-left: 12px; }
+  .nav-links a:hover { background: none; color: var(--blue-ink); padding-left: 12px; }
+  .nav-links a.active { background: none; color: var(--navy-900); font-weight: 700; padding-left: 12px; }
   .nav-hamburger { display: flex; }
 }
 
@@ -147,7 +150,7 @@ html:not(.js) .reveal { opacity: 1; transform: none; }
 .team-card img { width: 100%; aspect-ratio: 3/4; object-fit: cover; display: block; }
 .team-body { padding: 16px; }
 .team-body h3 { font-size: 1rem; color: var(--navy-900); }
-.team-body .role { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--brand-blue); margin: 4px 0 8px; }
+.team-body .role { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--blue-ink); margin: 4px 0 8px; }
 .team-body .phone { font-family: var(--font-mono); font-size: 0.85rem; color: var(--ink-soft); }
 .team-body .phone a { color: inherit; }
 
@@ -177,7 +180,7 @@ html:not(.js) .reveal { opacity: 1; transform: none; }
 .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
 .footer-col a { color: rgba(255,255,255,.85); font-size: 0.92rem; }
 .footer-col a:hover { color: var(--blue-300); }
-.footer-bottom { margin-top: 40px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,.12); font-size: 0.82rem; color: rgba(255,255,255,.5); }
+.footer-bottom { margin-top: 40px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,.12); font-size: 0.82rem; color: rgba(255,255,255,.68); }
 
 /* ===== Redusert bevegelse ===== */
 @media (prefers-reduced-motion: reduce) {
