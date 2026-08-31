@@ -78,10 +78,11 @@ html:not(.js) .reveal { opacity: 1; transform: none; }
 .partials-cached .logo-draw-dot  { animation: none; opacity: 1; transform: none; }
 .partials-cached .logo-draw-text { animation: none; opacity: 1; transform: none; }
 .nav-links { list-style: none; display: flex; gap: 8px; align-items: center; }
-.nav-links a { font-size: var(--text-xs); font-weight: 600; color: var(--ink); padding: 10px 16px; border-radius: 999px; transition: background .2s, color .2s; }
+/* Nav bruker fast UI-kontrollstørrelse (14px), utenfor --text-*-skalaen. */
+.nav-links a { font-size: 14px; font-weight: 600; color: var(--ink); padding: 10px 16px; border-radius: 999px; transition: background .2s, color .2s; }
 .nav-links a:hover { background: var(--paper-warm); color: var(--blue-ink); }
 .nav-links a.active { background: var(--navy-900); color: #fff; }
-.nav-cta { background: var(--copper-500); color: var(--navy-900) !important; padding: 10px 22px; border-radius: 999px; font-size: var(--text-xs); font-weight: 600; transition: background .2s, color .2s; }
+.nav-cta { background: var(--copper-500); color: var(--navy-900) !important; padding: 10px 22px; border-radius: 999px; font-size: 14px; font-weight: 600; transition: background .2s, color .2s; }
 .nav-cta:hover, .nav-cta.active { background: var(--copper-700); color: #fff !important; }
 .nav-hamburger { display: none; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; padding: 8px; }
 .nav-hamburger span { width: 22px; height: 2px; background: var(--navy-900); display: block; transition: transform .25s ease, opacity .2s ease; }
