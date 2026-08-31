@@ -65,8 +65,33 @@
       </div>
     </div>
 
-    <p class="reveal" style="margin-top:32px">
-      <a href="mailto:felles@rsks.no" class="btn btn-primary">Send oss en e-post</a>
+    <form class="kontakt-form reveal" id="kontakt-form" style="transition-delay:.06s">
+      <!-- TODO: bytt PLACEHOLDER_RSKS med ekte Formspree-ID (formspree.io → nytt skjema, mottaker felles@rsks.no) -->
+      <div class="form-row">
+        <div>
+          <label for="kf-navn">Navn</label>
+          <input type="text" id="kf-navn" name="navn" required autocomplete="name">
+        </div>
+        <div>
+          <label for="kf-epost">E-post</label>
+          <input type="email" id="kf-epost" name="email" required autocomplete="email">
+        </div>
+      </div>
+      <div>
+        <label for="kf-tlf">Telefon <span style="font-weight:400;color:var(--ink-soft)">(valgfritt)</span></label>
+        <input type="tel" id="kf-tlf" name="telefon" autocomplete="tel">
+      </div>
+      <div>
+        <label for="kf-melding">Melding</label>
+        <textarea id="kf-melding" name="melding" required></textarea>
+      </div>
+      <button type="submit" class="btn btn-primary">Send melding</button>
+      <p class="form-error" id="form-error">Noe gikk galt. Send oss gjerne en e-post direkte: <a href="mailto:felles@rsks.no">felles@rsks.no</a></p>
+      <div class="form-success" id="form-success">Takk! Vi har mottatt meldingen din og svarer så snart vi kan.</div>
+    </form>
+
+    <p class="reveal" style="margin-top:24px;font-size:var(--text-sm);color:var(--ink-soft)">
+      Foretrekker du e-post? <a href="mailto:felles@rsks.no" style="color:var(--blue-ink);font-weight:600">felles@rsks.no</a>
     </p>
 
     <div class="map-frame reveal" style="margin-top:8px">
@@ -84,6 +109,37 @@
 
 <div id="site-footer"></div>
 
+<script>
+  (function () {
+    const form = document.getElementById('kontakt-form');
+    if (!form) return;
+    const ENDPOINT = 'https://formspree.io/f/PLACEHOLDER_RSKS';
+    form.addEventListener('submit', async e => {
+      e.preventDefault();
+      const btn = form.querySelector('button[type="submit"]');
+      const err = document.getElementById('form-error');
+      const ok = document.getElementById('form-success');
+      err.classList.remove('visible');
+      btn.disabled = true;
+      btn.textContent = 'Sender…';
+      try {
+        const res = await fetch(ENDPOINT, {
+          method: 'POST',
+          body: new FormData(form),
+          headers: { 'Accept': 'application/json' }
+        });
+        if (!res.ok) throw new Error('server');
+        form.reset();
+        form.querySelectorAll('input,textarea,button').forEach(el => el.style.display = 'none');
+        ok.classList.add('visible');
+      } catch {
+        btn.disabled = false;
+        btn.textContent = 'Send melding';
+        err.classList.add('visible');
+      }
+    });
+  })();
+</script>
 <script src="js/main.js"></script>
 <!-- Cloudflare Web Analytics --><script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "3b2830d8c1b74ed68dee031783103adc"}'></script><!-- End Cloudflare Web Analytics -->
 </body>
