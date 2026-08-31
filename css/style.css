@@ -47,6 +47,9 @@ html:not(.js) .reveal { opacity: 1; transform: none; }
 .btn-outline:hover { border-color: var(--brand-blue); color: var(--brand-blue); }
 
 /* ===== Nav ===== */
+/* Reserver navens høyde på placeholder-diven, ellers hopper siden ~76px
+   nedover når header-partialen injiseres. */
+#site-header { min-height: 76px; }
 .nav { position: sticky; top: 0; z-index: 50; background: rgba(255,255,255,.92); backdrop-filter: blur(14px); border-bottom: 1px solid var(--line); }
 .nav .wrap { display: flex; align-items: center; justify-content: space-between; height: 76px; gap: 24px; }
 .nav-logo svg { display: block; height: 40px; width: auto; }
@@ -60,6 +63,10 @@ html:not(.js) .reveal { opacity: 1; transform: none; }
 @keyframes heroLineDraw { to { stroke-dashoffset: 0; } }
 @keyframes logoPopDot { to { opacity: 1; transform: scale(1); } }
 @keyframes logoFadeUp { to { opacity: 1; transform: translateY(0); } }
+/* Cachet header (gjentatt navigasjon i økta): hopp over logo-tegningen. */
+.partials-cached .logo-draw-line { animation: none; stroke-dashoffset: 0; }
+.partials-cached .logo-draw-dot  { animation: none; opacity: 1; transform: none; }
+.partials-cached .logo-draw-text { animation: none; opacity: 1; transform: none; }
 .nav-links { list-style: none; display: flex; gap: 8px; align-items: center; }
 .nav-links a { font-size: 14px; font-weight: 600; color: var(--ink); padding: 10px 16px; border-radius: 999px; transition: background .2s, color .2s; }
 .nav-links a:hover, .nav-links a.active { background: var(--paper-warm); color: var(--brand-blue); }
