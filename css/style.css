@@ -34,6 +34,8 @@ h1, h2, h3 { font-family: var(--font-display); font-weight: 700; }
 
 .reveal { opacity: 0; transform: translateY(30px); transition: opacity .7s cubic-bezier(.2,.7,.2,1), transform .7s cubic-bezier(.2,.7,.2,1); }
 .reveal.visible { opacity: 1; transform: none; }
+/* Uten JS: ingen reveal-skjuling. */
+html:not(.js) .reveal { opacity: 1; transform: none; }
 
 .btn { font-family: var(--font-display); font-weight: 600; font-size: 0.95rem; padding: 13px 26px; border-radius: 999px; border: none; cursor: pointer; text-decoration: none; display: inline-block; transition: background .2s, color .2s, transform .2s; }
 .btn:hover { transform: translateY(-2px); }
@@ -109,9 +111,13 @@ h1, h2, h3 { font-family: var(--font-display); font-weight: 700; }
 .divider-wrap svg { position: absolute; inset: 0; width: 100%; height: 100%; }
 .divider-label { position: relative; z-index: 1; font-family: var(--font-mono); font-size: 0.78rem; color: var(--navy-700); padding: 0 24px; letter-spacing: 0.04em; }
 
-.divider-line { stroke-dasharray: 1; stroke-dashoffset: 1; transition: stroke-dashoffset 2.4s ease-out; }
+.divider-line { stroke-dasharray: 1; stroke-dashoffset: 1; transition: stroke-dashoffset 1.2s ease-out; }
 .divider-wrap.drawn .divider-line { stroke-dashoffset: 0; }
 .divider-wrap.drawn .divider-line:nth-of-type(2) { transition-delay: .3s; }
+
+/* Umerket divider (rett før footer) – lavere, lettere, rent dekorativt */
+.divider-wrap--plain { height: 40px; }
+.divider-wrap--plain svg { opacity: 0.55; }
 
 /* ===== Stat cards ===== */
 .stat-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px,1fr)); gap: 18px; margin-top: 24px; }
@@ -165,3 +171,14 @@ h1, h2, h3 { font-family: var(--font-display); font-weight: 700; }
 .footer-col a { color: rgba(255,255,255,.85); font-size: 0.92rem; }
 .footer-col a:hover { color: var(--blue-300); }
 .footer-bottom { margin-top: 40px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,.12); font-size: 0.82rem; color: rgba(255,255,255,.5); }
+
+/* ===== Redusert bevegelse ===== */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .reveal { opacity: 1 !important; transform: none !important; transition: none !important; }
+  .btn:hover { transform: none; }
+  /* SVG-strektegninger til ferdig tilstand, ingen animasjon */
+  .logo-draw-line, .hero-line-draw, .divider-line { animation: none !important; transition: none !important; stroke-dashoffset: 0 !important; }
+  .logo-draw-dot { animation: none !important; opacity: 1 !important; transform: none !important; }
+  .logo-draw-text { animation: none !important; opacity: 1 !important; transform: none !important; }
+}

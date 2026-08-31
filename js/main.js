@@ -1,3 +1,5 @@
+const REDUCED_MOTION = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
 document.addEventListener('DOMContentLoaded', async () => {
   await Promise.all([
     loadPartial('partials/header.html', 'site-header'),
@@ -40,6 +42,8 @@ function initNav() {
 }
 
 function initCounters() {
+  const els = document.querySelectorAll('.stat-card .num');
+  if (REDUCED_MOTION || !('IntersectionObserver' in window)) return;   // tallene står ferdig i markup
   const io = new IntersectionObserver(entries => {
     entries.forEach(entry => {
       if (!entry.isIntersecting) return;
@@ -55,10 +59,15 @@ function initCounters() {
       })(start);
     });
   }, { threshold: 0.4 });
-  document.querySelectorAll('.stat-card .num').forEach(el => io.observe(el));
+  els.forEach(el => io.observe(el));
 }
 
 function initDividers() {
+  const els = document.querySelectorAll('.divider-wrap');
+  if (REDUCED_MOTION || !('IntersectionObserver' in window)) {
+    els.forEach(el => el.classList.add('drawn'));
+    return;
+  }
   const io = new IntersectionObserver(entries => {
     entries.forEach(entry => {
       if (!entry.isIntersecting) return;
@@ -66,14 +75,19 @@ function initDividers() {
       io.unobserve(entry.target);
     });
   }, { threshold: 0.4 });
-  document.querySelectorAll('.divider-wrap').forEach(el => io.observe(el));
+  els.forEach(el => io.observe(el));
 }
 
 function initReveal() {
+  window.__revealReady = true;
+  if (REDUCED_MOTION || !('IntersectionObserver' in window)) {
+    document.querySelectorAll('.reveal').forEach(el => el.classList.add('visible'));
+    return;
+  }
   const io = new IntersectionObserver(entries => {
-    entries.forEach((entry, i) => {
+    entries.forEach(entry => {
       if (entry.isIntersecting) {
-        setTimeout(() => entry.target.classList.add('visible'), i * 60);
+        entry.target.classList.add('visible');   // stagger via transition-delay i markup, ikke setTimeout
         io.unobserve(entry.target);
       }
     });
