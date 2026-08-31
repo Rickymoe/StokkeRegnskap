@@ -14,7 +14,9 @@ document.addEventListener('DOMContentLoaded', async () => {
 // Cacher header/footer i sessionStorage. Første sidevisning i en økt henter
 // og lagrer; alle senere navigasjoner injiserer synkront fra cache, så
 // headeren rekker ikke å blinke tomt før fetch-en fyller den (og siden
-// hopper ikke, jf. #site-header min-height). Cachen revalideres i bakgrunnen.
+// hopper ikke, jf. #site-header min-height). Bakgrunns-fetchen oppdaterer
+// cachen, men re-injiserer ikke headeren som står – en endret partial
+// slår derfor først inn ved NESTE navigasjon (som leser den friske cachen).
 // outerHTML (ikke innerHTML): placeholder-diven skal ikke bli en wrapper
 // rundt <nav> – en wrapper med nøyaktig navens høyde gir position: sticky
 // ingen plass å feste seg i.
@@ -67,7 +69,6 @@ function initNav() {
 }
 
 function initCounters() {
-  const els = document.querySelectorAll('.stat-card .num');
   if (REDUCED_MOTION || !('IntersectionObserver' in window)) return;   // tallene står ferdig i markup
   const io = new IntersectionObserver(entries => {
     entries.forEach(entry => {
@@ -84,6 +85,7 @@ function initCounters() {
       })(start);
     });
   }, { threshold: 0.4 });
+  const els = document.querySelectorAll('.stat-card .num');
   els.forEach(el => io.observe(el));
 }
 

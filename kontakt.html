@@ -19,7 +19,7 @@
 <div id="site-header"></div>
 
 <section class="page-hero">
-  <svg class="watermark" viewBox="0 0 900 90" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+  <svg class="watermark" viewBox="0 0 900 90" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
     <defs>
       <filter id="cellBlurHero" x="-20%" y="-20%" width="140%" height="140%">
         <feGaussianBlur stdDeviation="2"/>
@@ -66,7 +66,9 @@
     </div>
 
     <form class="kontakt-form reveal" id="kontakt-form" style="transition-delay:.06s">
-      <!-- TODO: bytt PLACEHOLDER_RSKS med ekte Formspree-ID (formspree.io → nytt skjema, mottaker felles@rsks.no) -->
+      <!-- TODO: bytt PLACEHOLDER_RSKS med ekte Formspree-ID (formspree.io → nytt skjema, mottaker felles@rsks.no).
+           Inntil ekte ID er satt, hopper submit over fetch og åpner besøkerens e-postklient
+           med en ferdig utfylt mailto til felles@rsks.no (ingen datatap). -->
       <div class="form-row">
         <div>
           <label for="kf-navn">Navn</label>
@@ -86,9 +88,9 @@
         <textarea id="kf-melding" name="melding" required></textarea>
       </div>
       <button type="submit" class="btn btn-primary">Send melding</button>
-      <p class="form-error" id="form-error">Noe gikk galt. Send oss gjerne en e-post direkte: <a href="mailto:felles@rsks.no">felles@rsks.no</a></p>
-      <div class="form-success" id="form-success">Takk! Vi har mottatt meldingen din og svarer så snart vi kan.</div>
+      <p class="form-error" id="form-error" role="alert">Noe gikk galt. Send oss gjerne en e-post direkte: <a href="mailto:felles@rsks.no">felles@rsks.no</a></p>
     </form>
+    <div class="form-success" id="form-success" role="status">Takk! Vi har mottatt meldingen din og svarer så snart vi kan.</div>
 
     <p class="reveal" style="margin-top:24px;font-size:var(--text-sm);color:var(--ink-soft)">
       Foretrekker du e-post? <a href="mailto:felles@rsks.no" style="color:var(--blue-ink);font-weight:600">felles@rsks.no</a>
@@ -101,7 +103,7 @@
 </section>
 
 <div class="divider-wrap divider-wrap--plain">
-  <svg viewBox="0 0 900 90" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+  <svg viewBox="0 0 900 90" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
     <polyline class="divider-line" pathLength="1" points="0,70 90,60 180,65 270,45 360,52 450,30 540,38 630,20 720,25 810,10 900,15" fill="none" stroke="#009FE3" stroke-width="2" opacity="0.35"/>
     <polyline class="divider-line" pathLength="1" points="0,80 90,75 180,78 270,62 360,66 450,50 540,55 630,40 720,44 810,32 900,35" fill="none" stroke="#C98A3E" stroke-width="2" opacity="0.3"/>
   </svg>
@@ -116,9 +118,14 @@
     const ENDPOINT = 'https://formspree.io/f/PLACEHOLDER_RSKS';
     form.addEventListener('submit', async e => {
       e.preventDefault();
+      if (ENDPOINT.includes('PLACEHOLDER')) {
+        const fd = new FormData(form);
+        const body = `Navn: ${fd.get('navn')}\nE-post: ${fd.get('email')}\nTelefon: ${fd.get('telefon') || '—'}\n\n${fd.get('melding')}`;
+        window.location.href = 'mailto:felles@rsks.no?subject=' + encodeURIComponent('Henvendelse fra nettsiden') + '&body=' + encodeURIComponent(body);
+        return;
+      }
       const btn = form.querySelector('button[type="submit"]');
       const err = document.getElementById('form-error');
-      const ok = document.getElementById('form-success');
       err.classList.remove('visible');
       btn.disabled = true;
       btn.textContent = 'Sender…';
@@ -130,8 +137,8 @@
         });
         if (!res.ok) throw new Error('server');
         form.reset();
-        form.querySelectorAll('input,textarea,button').forEach(el => el.style.display = 'none');
-        ok.classList.add('visible');
+        form.hidden = true;
+        document.getElementById('form-success').classList.add('visible');
       } catch {
         btn.disabled = false;
         btn.textContent = 'Send melding';
