@@ -176,6 +176,18 @@ html.js #site-header { min-height: 77px; }
 .map-frame { border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow); margin-top: 24px; border: 1px solid var(--line); }
 .map-frame iframe { width: 100%; height: 360px; border: 0; display: block; }
 
+/* ===== Lett hover på kort ===== */
+.stat-card, .service-card, .team-card, .kinfo-box {
+  transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease;
+}
+@media (hover: hover) {
+  .stat-card:hover, .service-card:hover, .team-card:hover, .kinfo-box:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 32px rgba(15, 42, 67, .15);
+  }
+  .service-card:hover, .team-card:hover { border-color: rgba(0, 159, 227, .4); }
+}
+
 /* ===== Kontaktskjema ===== */
 .kontakt-form { margin-top: 32px; display: grid; gap: 16px; max-width: 560px; }
 .kontakt-form[hidden] { display: none; }   /* author-regelen over slår ellers UA-[hidden] */
@@ -223,6 +235,7 @@ html.js #site-header { min-height: 77px; }
   html { scroll-behavior: auto; }
   .reveal { opacity: 1 !important; transform: none !important; transition: none !important; }
   .btn:hover { transform: none; }
+  .stat-card:hover, .service-card:hover, .team-card:hover, .kinfo-box:hover { transform: none; }
   /* SVG-strektegninger til ferdig tilstand, ingen animasjon */
   .logo-draw-line, .hero-line-draw, .divider-line { animation: none !important; transition: none !important; stroke-dashoffset: 0 !important; }
   .logo-draw-dot { animation: none !important; opacity: 1 !important; transform: none !important; }
